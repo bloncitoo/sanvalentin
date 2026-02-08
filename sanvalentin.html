@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>San Valentín 💘</title>
+
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      color: white;
+      font-size: 2.8rem;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .buttons {
+      display: flex;
+      gap: 25px;
+      position: relative;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.3rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    #yes {
+      background-color: #ff1e56;
+      color: white;
+    }
+
+    #no {
+      background-color: white;
+      color: #ff1e56;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>¿Quieres ser mi San Valentín? 💕</h1>
+
+  <div class="buttons">
+    <button id="yes">Sí 💖</button>
+    <button id="no">No 🙄</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+
+    let yesScale = 1;
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 120);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      // El sí crece 👀
+      yesScale += 0.15;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+      document.body.innerHTML = `
+        <h1 style="color:white;">Sabía que dirías que sí 💘🥹</h1>
+
+        <iframe width="560" height="315"
+          src="https://www.youtube.com/embed/MfMfk-nhOu8?autoplay=1"
+          title="YouTube video player"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen>
+        </iframe>
+      `;
+    });
+  </script>
+
+</body>
+</html>
