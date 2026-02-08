@@ -1,98 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>San Valentín 💘</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>San Valentín 💖</title>
 
-  <style>
-    body {
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      overflow: hidden;
-      text-align: center;
-    }
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-    h1 {
-      color: white;
-      font-size: 2.8rem;
-      margin-bottom: 40px;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
-    }
+  body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #ff8fab, #ff477e);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+  }
 
-    .buttons {
-      display: flex;
-      gap: 25px;
-      position: relative;
-    }
+  h1 {
+    font-size: 2.2rem;
+    margin: 15px 20px;
+    animation: pop 0.8s ease;
+  }
 
-    button {
-      padding: 15px 30px;
-      font-size: 1.3rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+  @keyframes pop {
+    from { transform: scale(0.8); opacity: 0 }
+    to { transform: scale(1); opacity: 1 }
+  }
 
-    #yes {
-      background-color: #ff1e56;
-      color: white;
-    }
+  img {
+    width: 180px;
+    max-width: 70%;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+  }
 
-    #no {
-      background-color: white;
-      color: #ff1e56;
-      position: absolute;
-    }
-  </style>
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+  }
+
+  #yes, #no {
+    padding: 16px 36px;
+    font-size: 1.2rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    transition: all 0.25s ease;
+  }
+
+  #yes {
+    background: #fff;
+    color: #ff477e;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  }
+
+  #no {
+    background: rgba(255,255,255,0.9);
+    color: #ff477e;
+  }
+</style>
 </head>
 
 <body>
 
-  <h1>¿Quieres ser mi San Valentín? 💕</h1>
+<img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="gatito tierno">
 
-  <div class="buttons">
-    <button id="yes">Sí 💖</button>
-    <button id="no">No 🙄</button>
-  </div>
+<h1 id="question">¿Quieres ser mi San Valentín? 💕</h1>
 
-  <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
+<button id="yes">Sí 💖</button>
+<button id="no">No 🙄</button>
 
-    let yesScale = 1;
+<script>
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
 
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 120);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
+let scale = 1;
 
-      // El sí crece 👀
-      yesScale += 0.15;
-      yesBtn.style.transform = `scale(${yesScale})`;
-    });
+function randomPosition(btn) {
+  const maxX = window.innerWidth - btn.offsetWidth;
+  const maxY = window.innerHeight - btn.offsetHeight;
+  btn.style.left = Math.random() * maxX + "px";
+  btn.style.top = Math.random() * maxY + "px";
+}
 
-    yesBtn.addEventListener("click", () => {
-      document.body.innerHTML = `
-        <h1 style="color:white;">Sabía que dirías que sí 💘🥹</h1>
+randomPosition(no);
+randomPosition(yes);
 
-        <iframe width="560" height="315"
-          src="https://www.youtube.com/embed/MfMfk-nhOu8?autoplay=1"
-          title="YouTube video player"
-          frameborder="0"
-          allow="autoplay; encrypted-media"
-          allowfullscreen>
-        </iframe>
-      `;
-    });
-  </script>
+function escapeNo() {
+  randomPosition(no);
+  scale += 0.18;
+  yes.style.transform = `scale(${scale})`;
+}
+
+no.addEventListener("mouseover", escapeNo);
+no.addEventListener("touchstart", escapeNo);
+
+yes.addEventListener("click", () => {
+  document.body.innerHTML = `
+    <h1>Sabía que dirías que sí 🥹💘</h1>
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" style="width:200px;">
+    <iframe width="100%" height="315"
+      src="https://www.youtube.com/embed/MfMfk-nhOu8?autoplay=1"
+      frameborder="0"
+      allow="autoplay"
+      allowfullscreen>
+    </iframe>
+  `;
+});
+</script>
 
 </body>
 </html>
